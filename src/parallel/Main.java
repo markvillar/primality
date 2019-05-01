@@ -44,7 +44,7 @@ public class Main {
     // Driver Program to test above function 
     public static void main(String args[]) throws Exception {
 
-        int numberOfCores = Runtime.getRuntime().availableProcessors();
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
 
         int inputNumber = 100;
 
@@ -62,8 +62,7 @@ public class Main {
         List<Integer> generatedNumbers;
         generatedNumbers = IntStream.range(1, (inputNumber + 1)).boxed().collect(Collectors.toList());
 
-        List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, numberOfCores);
-
+        List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, availableProcessors);
         listOfLists.forEach((sublist) -> {
             System.out.println(sublist);
         });
@@ -73,9 +72,9 @@ public class Main {
         long startTimeNano = System.nanoTime();
 
         //Create threads
-        Primality[] thread = new Primality[numberOfCores];
+        Primality[] thread = new Primality[availableProcessors];
 
-        for (int core = 0; core < numberOfCores; core++) {
+        for (int core = 0; core < availableProcessors; core++) {
             thread[core] = new Primality();
         }
 
