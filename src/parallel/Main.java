@@ -64,9 +64,9 @@ public class Main {
 
         List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, numberOfCores);
 
-        for (List<Integer> sublist : listOfLists) {
+        listOfLists.forEach((sublist) -> {
             System.out.println(sublist);
-        }
+        });
 
         //Start timers
         long startTime = System.currentTimeMillis();
