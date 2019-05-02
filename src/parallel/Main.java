@@ -46,7 +46,7 @@ public class Main {
 
         int availableProcessors = Runtime.getRuntime().availableProcessors();
 
-        int inputNumber = 10000;
+        int inputNumber = 200;
 
         int numberOfIntegersPerThread = inputNumber / availableProcessors;
 

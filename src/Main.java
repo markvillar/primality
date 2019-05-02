@@ -42,9 +42,7 @@ public class Main {
     // Driver Program to test above function 
     public static void main(String args[]) {
 
-        int cores = Runtime.getRuntime().availableProcessors();
-
-        int inputNumber = 10000;
+        int inputNumber = 200;
 
         //Generate ArrayList of boolean values
         List<Boolean> primes = new ArrayList<>(Arrays.asList(new Boolean[inputNumber + 1]));
