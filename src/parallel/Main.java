@@ -67,54 +67,32 @@ public class Main {
         long startTimeNano = System.nanoTime();
 
         //Create threads
-        Primality[] thread = new Primality[availableProcessors];
+        Primality[] threads = new Primality[availableProcessors];
 
-        for (int core = 0; core < availableProcessors; core++) {
-            thread[core] = new Primality();
+        //List of lists for individual threads
+        for (int listIndex = 0; listIndex < availableProcessors; listIndex++) {
+            threads[listIndex] = new Primality();
+            threads[listIndex].listToProcess = listOfLists.get(listIndex);
         }
 
-//        Primality thread1 = new Primality();
-//        thread1.listToProcess = generatedNumbers.subList(0, 25);
-//
-//        Primality thread2 = new Primality();
-//        thread2.listToProcess = generatedNumbers.subList(25, 50);
-//
-//        Primality thread3 = new Primality();
-//        thread3.listToProcess = generatedNumbers.subList(50, 75);
-//
-//        Primality thread4 = new Primality();
-//        thread4.listToProcess = generatedNumbers.subList(75, 100);
 
-        //Start threads
-//        thread1.start();
-//        thread2.start();
-//        thread3.start();
-//        thread4.start();
-
-        for (int process = 0; process < thread.length; process++) {
-            thread[process].start();
+        //Start All Threads
+        for (Primality thread : threads) {
+            thread.start();
         }
 
         try {
-//            thread1.join();
-//            thread2.join();
-//            thread3.join();
-//            thread4.join();
-            for (int process = 0; process < thread.length; process++) {
-                thread[process].join();
+            for (Primality thread : threads) {
+                thread.join();
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
 
-//        listOfPrimes.addAll(thread1.primeList);
-//        listOfPrimes.addAll(thread2.primeList);
-//        listOfPrimes.addAll(thread3.primeList);
-//        listOfPrimes.addAll(thread4.primeList);
-
-        listOfPrimes.forEach((number) -> {
-            System.out.print(number + ", ");
-        });
+        //Collect the results from Threads
+        for (Primality thread : threads) {
+            listOfPrimes.addAll(thread.primeList);
+        }
 
         //End timers
         long endTimeNano = System.nanoTime();
