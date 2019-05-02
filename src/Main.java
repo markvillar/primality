@@ -44,7 +44,7 @@ public class Main {
 
         int cores = Runtime.getRuntime().availableProcessors();
 
-        int inputNumber = 100;
+        int inputNumber = 10000;
 
         //Generate ArrayList of boolean values
         List<Boolean> primes = new ArrayList<>(Arrays.asList(new Boolean[inputNumber + 1]));
