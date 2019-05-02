@@ -61,10 +61,8 @@ public class Main {
         List<Integer> generatedNumbers;
         generatedNumbers = IntStream.range(1, (inputNumber + 1)).boxed().collect(Collectors.toList());
 
-
-        //Start timers
-        long startTime = System.currentTimeMillis();
-        long startTimeNano = System.nanoTime();
+        //Partition the list according to the available Processors in the System
+        List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, numberOfIntegersPerThread);
 
         //Create threads
         Primality[] threads = new Primality[availableProcessors];
@@ -75,17 +73,21 @@ public class Main {
             threads[listIndex].listToProcess = listOfLists.get(listIndex);
         }
 
+        //Start timers
+        long startTime = System.currentTimeMillis();
+        long startTimeNano = System.nanoTime();
 
         //Start All Threads
         for (Primality thread : threads) {
             thread.start();
         }
 
+        //Join All Threads
         try {
             for (Primality thread : threads) {
                 thread.join();
             }
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.out.println("Error: " + e);
         }
 
@@ -97,6 +99,10 @@ public class Main {
         //End timers
         long endTimeNano = System.nanoTime();
         long endTime = System.currentTimeMillis();
+
+        listOfPrimes.forEach((number) -> {
+            System.out.print(number + ", ");
+        });
 
         System.out.println(" ");
         System.out.println("Parallel Version");
