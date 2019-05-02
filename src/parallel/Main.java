@@ -57,17 +57,10 @@ public class Main {
         //Set all boolean values to false
         Collections.fill(primes, false);
 
-        //List to store prime numbers
-        List<Integer> primeSet = new ArrayList<>(Arrays.asList(new Integer[inputNumber + 1]));
-
         //Generate numbers from 0 to inputNumber for Testing
         List<Integer> generatedNumbers;
         generatedNumbers = IntStream.range(1, (inputNumber + 1)).boxed().collect(Collectors.toList());
 
-        List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, availableProcessors);
-        listOfLists.forEach((sublist) -> {
-            System.out.println(sublist);
-        });
 
         //Start timers
         long startTime = System.currentTimeMillis();
