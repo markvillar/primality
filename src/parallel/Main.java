@@ -100,9 +100,10 @@ public class Main {
         long endTimeNano = System.nanoTime();
         long endTime = System.currentTimeMillis();
 
-        listOfPrimes.forEach((number) -> {
-            System.out.print(number + ", ");
-        });
+        //Uncomment to output all prime values
+        //listOfPrimes.forEach((number) -> {
+        //    System.out.print(number + ", ");
+        //});
 
         System.out.println(" ");
         System.out.println("Parallel Version");
