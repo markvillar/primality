@@ -43,7 +43,7 @@ public class Main {
 
     // Driver Program to test above function 
     public static void main(String args[]) throws Exception {
-
+        
         int availableProcessors = Runtime.getRuntime().availableProcessors();
 
         int inputNumber = 200;
