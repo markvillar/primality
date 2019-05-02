@@ -44,7 +44,7 @@ public class Main {
 
         int cores = Runtime.getRuntime().availableProcessors();
 
-        int inputNumber = 100;
+        int inputNumber = 10000;
 
         //Generate ArrayList of boolean values
         List<Boolean> primes = new ArrayList<>(Arrays.asList(new Boolean[inputNumber + 1]));
@@ -56,8 +56,7 @@ public class Main {
 
         //List to store prime numbers
         List<Integer> primeSet = new ArrayList<>(Arrays.asList(new Integer[inputNumber + 1]));
-        
-        
+
         //Start timers
         long startTime = System.currentTimeMillis();
         long startTimeNano = System.nanoTime();
@@ -68,11 +67,7 @@ public class Main {
             primes.set(number, result);
         });
 
-        //End timers
-        long endTimeNano = System.nanoTime();
-        long endTime = System.currentTimeMillis();
-
-        //Output the results
+        //Retrieve all prime numbers
         for (int iterator = 0; iterator < primes.size(); iterator++) {
 
             boolean result = primes.get(iterator);
@@ -83,9 +78,15 @@ public class Main {
 
         }
 
+        //End timers
+        long endTimeNano = System.nanoTime();
+        long endTime = System.currentTimeMillis();
+
+        //Output the results
         primeSet.stream().filter(value -> value != null).forEach((result) -> {
             System.out.print(result + ", ");
         });
+
         System.out.println(" ");
         System.out.println("Sequential Version");
         System.out.println("Calculated in " + (endTimeNano - startTimeNano) + " nanoseconds");
