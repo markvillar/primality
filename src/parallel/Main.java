@@ -48,6 +48,8 @@ public class Main {
 
         int inputNumber = 100;
 
+        int numberOfIntegersPerThread = inputNumber / availableProcessors;
+
         List<Integer> listOfPrimes = new ArrayList<>();
 
         //Generate ArrayList of boolean values
