@@ -48,6 +48,8 @@ public class Main {
 
         int inputNumber = 100;
 
+        int numberOfIntegersPerThread = inputNumber / availableProcessors;
+
         List<Integer> listOfPrimes = new ArrayList<>();
 
         //Generate ArrayList of boolean values
@@ -55,75 +57,52 @@ public class Main {
         //Set all boolean values to false
         Collections.fill(primes, false);
 
-        //List to store prime numbers
-        List<Integer> primeSet = new ArrayList<>(Arrays.asList(new Integer[inputNumber + 1]));
-
         //Generate numbers from 0 to inputNumber for Testing
         List<Integer> generatedNumbers;
         generatedNumbers = IntStream.range(1, (inputNumber + 1)).boxed().collect(Collectors.toList());
 
-        List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, availableProcessors);
-        listOfLists.forEach((sublist) -> {
-            System.out.println(sublist);
-        });
+        //Partition the list according to the available Processors in the System
+        List<List<Integer>> listOfLists = Lists.partition(generatedNumbers, numberOfIntegersPerThread);
+
+        //Create threads
+        Primality[] threads = new Primality[availableProcessors];
+
+        //List of lists for individual threads
+        for (int listIndex = 0; listIndex < availableProcessors; listIndex++) {
+            threads[listIndex] = new Primality();
+            threads[listIndex].listToProcess = listOfLists.get(listIndex);
+        }
 
         //Start timers
         long startTime = System.currentTimeMillis();
         long startTimeNano = System.nanoTime();
 
-        //Create threads
-        Primality[] thread = new Primality[availableProcessors];
-
-        for (int core = 0; core < availableProcessors; core++) {
-            thread[core] = new Primality();
+        //Start All Threads
+        for (Primality thread : threads) {
+            thread.start();
         }
 
-//        Primality thread1 = new Primality();
-//        thread1.listToProcess = generatedNumbers.subList(0, 25);
-//
-//        Primality thread2 = new Primality();
-//        thread2.listToProcess = generatedNumbers.subList(25, 50);
-//
-//        Primality thread3 = new Primality();
-//        thread3.listToProcess = generatedNumbers.subList(50, 75);
-//
-//        Primality thread4 = new Primality();
-//        thread4.listToProcess = generatedNumbers.subList(75, 100);
-
-        //Start threads
-//        thread1.start();
-//        thread2.start();
-//        thread3.start();
-//        thread4.start();
-
-        for (int process = 0; process < thread.length; process++) {
-            thread[process].start();
-        }
-
+        //Join All Threads
         try {
-//            thread1.join();
-//            thread2.join();
-//            thread3.join();
-//            thread4.join();
-            for (int process = 0; process < thread.length; process++) {
-                thread[process].join();
+            for (Primality thread : threads) {
+                thread.join();
             }
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.out.println("Error: " + e);
         }
 
-//        listOfPrimes.addAll(thread1.primeList);
-//        listOfPrimes.addAll(thread2.primeList);
-//        listOfPrimes.addAll(thread3.primeList);
-//        listOfPrimes.addAll(thread4.primeList);
-
-        listOfPrimes.forEach((number) -> {
-            System.out.print(number + ", ");
-        });
+        //Collect the results from Threads
+        for (Primality thread : threads) {
+            listOfPrimes.addAll(thread.primeList);
+        }
 
         //End timers
         long endTimeNano = System.nanoTime();
         long endTime = System.currentTimeMillis();
+
+        listOfPrimes.forEach((number) -> {
+            System.out.print(number + ", ");
+        });
 
         System.out.println(" ");
         System.out.println("Parallel Version");
