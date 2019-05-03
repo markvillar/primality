@@ -65,6 +65,10 @@ public class Main {
             primes.set(number, result);
         });
 
+        //End timers
+        long endTimeNano = System.nanoTime();
+        long endTime = System.currentTimeMillis();        
+        
         //Retrieve all prime numbers
         for (int iterator = 0; iterator < primes.size(); iterator++) {
 
@@ -75,10 +79,6 @@ public class Main {
             }
 
         }
-
-        //End timers
-        long endTimeNano = System.nanoTime();
-        long endTime = System.currentTimeMillis();
 
         //Uncomment to output all prime values
         //primeSet.stream().filter(value -> value != null).forEach((result) -> {

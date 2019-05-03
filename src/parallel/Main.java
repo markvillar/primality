@@ -90,15 +90,15 @@ public class Main {
         } catch (InterruptedException e) {
             System.out.println("Error: " + e);
         }
+        
+        //End timers
+        long endTimeNano = System.nanoTime();
+        long endTime = System.currentTimeMillis();
 
         //Collect the results from Threads
         for (Primality thread : threads) {
             listOfPrimes.addAll(thread.primeList);
         }
-
-        //End timers
-        long endTimeNano = System.nanoTime();
-        long endTime = System.currentTimeMillis();
 
         //Uncomment to output all prime values
         //listOfPrimes.forEach((number) -> {
