@@ -46,7 +46,7 @@ public class Main {
         
         int availableProcessors = Runtime.getRuntime().availableProcessors();
 
-        int inputNumber = 50000000;
+        int inputNumber = 1000;
 
         int numberOfIntegersPerThread = inputNumber / availableProcessors;
 
@@ -90,20 +90,20 @@ public class Main {
         } catch (InterruptedException e) {
             System.out.println("Error: " + e);
         }
+        
+        //End timers
+        long endTimeNano = System.nanoTime();
+        long endTime = System.currentTimeMillis();
 
         //Collect the results from Threads
         for (Primality thread : threads) {
             listOfPrimes.addAll(thread.primeList);
         }
 
-        //End timers
-        long endTimeNano = System.nanoTime();
-        long endTime = System.currentTimeMillis();
-
         //Uncomment to output all prime values
-        //listOfPrimes.forEach((number) -> {
-        //    System.out.print(number + ", ");
-        //});
+        listOfPrimes.forEach((number) -> {
+            System.out.print(number + ", ");
+        });
 
         System.out.println(" ");
         System.out.println("Parallel Version");

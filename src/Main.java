@@ -42,7 +42,7 @@ public class Main {
     // Driver Program to test above function 
     public static void main(String args[]) {
 
-        int inputNumber = 50000000;
+        int inputNumber = 1000;
 
         //Generate ArrayList of boolean values
         List<Boolean> primes = new ArrayList<>(Arrays.asList(new Boolean[inputNumber + 1]));
@@ -65,6 +65,10 @@ public class Main {
             primes.set(number, result);
         });
 
+        //End timers
+        long endTimeNano = System.nanoTime();
+        long endTime = System.currentTimeMillis();        
+        
         //Retrieve all prime numbers
         for (int iterator = 0; iterator < primes.size(); iterator++) {
 
@@ -76,14 +80,10 @@ public class Main {
 
         }
 
-        //End timers
-        long endTimeNano = System.nanoTime();
-        long endTime = System.currentTimeMillis();
-
         //Uncomment to output all prime values
-        //primeSet.stream().filter(value -> value != null).forEach((result) -> {
-        //    System.out.print(result + ", ");
-        //});
+        primeSet.stream().filter(value -> value != null).forEach((result) -> {
+            System.out.print(result + ", ");
+        });
 
         System.out.println(" ");
         System.out.println("Sequential Version");
