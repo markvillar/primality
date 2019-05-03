@@ -101,9 +101,9 @@ public class Main {
         }
 
         //Uncomment to output all prime values
-        //listOfPrimes.forEach((number) -> {
-        //    System.out.print(number + ", ");
-        //});
+        listOfPrimes.forEach((number) -> {
+            System.out.print(number + ", ");
+        });
 
         System.out.println(" ");
         System.out.println("Parallel Version");

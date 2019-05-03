@@ -81,9 +81,9 @@ public class Main {
         }
 
         //Uncomment to output all prime values
-        //primeSet.stream().filter(value -> value != null).forEach((result) -> {
-        //    System.out.print(result + ", ");
-        //});
+        primeSet.stream().filter(value -> value != null).forEach((result) -> {
+            System.out.print(result + ", ");
+        });
 
         System.out.println(" ");
         System.out.println("Sequential Version");
