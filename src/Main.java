@@ -42,7 +42,7 @@ public class Main {
     // Driver Program to test above function 
     public static void main(String args[]) {
 
-        int inputNumber = 50000000;
+        int inputNumber = 1000;
 
         //Generate ArrayList of boolean values
         List<Boolean> primes = new ArrayList<>(Arrays.asList(new Boolean[inputNumber + 1]));
